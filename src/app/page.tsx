@@ -221,8 +221,18 @@ export default function Home() {
         .fromTo(screens[3] as Element, { opacity: 0 }, { opacity: 1, duration: 0.4 }, "<");
     });
 
-    /* ── SCENE 3: GALLERY ── */
-    mm.add("(min-width: 1024px)", () => {
+    gsap.fromTo(showcaseRef.current, { opacity: 0, y: 40 }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: showcaseRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      }
+    });
+
       gsap.to(".gallery-track", {
         xPercent: -65,
         ease: "none",
@@ -235,7 +245,6 @@ export default function Home() {
           anticipatePin: 1,
         }
       });
-    });
 
     /* ── SCENE 5: LIVE LEDGER TEXT THEME SWITCH ── */
     ScrollTrigger.create({
@@ -272,31 +281,29 @@ export default function Home() {
       </nav>
 
       {/* ── SCENE 1: THE HERO ─────────────────────────────────────── */}
-      <section ref={heroRef} className="min-h-screen lg:h-screen w-full relative flex items-center justify-center overflow-y-auto bg-[#FAFBFC] py-20 lg:py-0">
+      <section ref={heroRef} className="min-h-screen lg:h-screen w-full relative flex items-center justify-center overflow-y-auto bg-[#FAFBFC] py-12 lg:py-0">
         {/* Map background */}
         <div className="absolute inset-0 w-full h-full">
-          {mounted && <CityMap intensity={0.75} className="w-full h-full object-cover" />}
+          <Image src="/horizontal-image.png" alt="Active city map background for mobile" fill priority className="object-cover md:hidden" />
+          <Image src="/tablet-image.png" alt="Active city map background for tablet" fill priority className="object-cover hidden md:block lg:hidden" />
+          <Image src="/map.png" alt="Active city map background" fill priority className="object-cover hidden lg:block" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#FAFBFC] via-transparent to-transparent pointer-events-none" />
           {/* Radial mask to fade map details directly behind the text for maximum legibility */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,251,252,0.85)_15%,rgba(250,251,252,0.3)_60%,transparent_100%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,251,252,0.88)_18%,rgba(250,251,252,0.3)_62%,transparent_100%)] pointer-events-none" />
           {/* Darkening overlay that animates in during scroll */}
           <div className="hero-map-overlay absolute inset-0 bg-[#FAFBFC] opacity-0 pointer-events-none" />
         </div>
 
-        <div className="hero-content relative z-10 flex flex-col items-center justify-center text-center px-6 mt-16 lg:mt-6 pointer-events-auto">
+        <div className="hero-content relative z-10 flex flex-col items-center justify-center text-center px-6 mt-16 lg:mt-6 pointer-events-auto w-full max-w-[min(760px,92vw)] mx-auto">
           
-          {/* Active Grid Badge */}
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#16A34A]/10 border border-[#16A34A]/25 text-[#16A34A] text-[9.5px] font-black uppercase tracking-widest mb-6 lg:mb-3 animate-pulse">
-            <Globe className="w-3.5 h-3.5" /> India's Live Active Grid
-          </span>
-          
-          <h1 className="font-display font-black text-[#1F2937] leading-[0.85] tracking-tighter" style={{ fontSize: "clamp(64px, 10vw, 150px)" }}>
-            Leave your<br />
-            <span className="italic font-display font-normal text-[#16A34A]">mark.</span>
+          <h1 className="font-display font-black leading-[0.98] tracking-tight text-center" style={{ fontSize: "clamp(48px, 8.5vw, 88px)" }}>
+            <span className="block text-[#1F2937]">What if</span>
+            <span className="block -mt-1 text-[#16A34A] italic" style={{ fontSize: "clamp(54px, 9vw, 92px)" }}>every workout</span>
+            <span className="block text-[#1F2937]">left a mark?</span>
           </h1>
           
-          <p className="mt-8 lg:mt-4 text-lg font-light max-w-sm text-[#4B5563] text-balance">
-            Your walks, runs, rides, and daily workouts map live, evolving routes on your city's active grid.
+          <p className="mt-6 lg:mt-4 text-base sm:text-lg font-light max-w-sm text-[#4B5563] text-balance">
+            not just on you, but on <span className="text-[#16A34A] font-semibold">your city.</span>
           </p>
 
           <div id="hero-waitlist" className="mt-10 lg:mt-6 w-full max-w-sm scroll-mt-32">
@@ -311,7 +318,7 @@ export default function Home() {
       </section>
 
       {/* ── SCENE 2: APP SHOWCASE (APPLE STYLE) ───────────────────── */}
-      <section ref={showcaseRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-start lg:justify-between py-6 lg:py-10 lg:h-screen">
+      <section ref={showcaseRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-start lg:justify-between py-4 lg:py-8 lg:h-screen">
         {/* Subtle Coordinate Grid Background */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#1F2937 1px, transparent 1px), linear-gradient(90deg, #1F2937 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         
