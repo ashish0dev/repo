@@ -1,0 +1,30 @@
+{
+  "name": "revo-waitlist",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "framer-motion": "^12.42.2",
+    "lucide-react": "^1.24.0",
+    "next": "16.2.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@gsap/react": "^2.1.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.25",
+    "tailwindcss": "^4",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,128 @@
+@import "tailwindcss";
+@source "../components";
+@source "../app";
+
+@theme {
+  --font-sans: var(--font-space-grotesk), sans-serif;
+  --font-display: var(--font-space-grotesk), sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: #FAFBFC;
+    --foreground: #1F2937;
+    --accent: #16A34A;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-space-grotesk), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Lenis Recommended Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Utilities for Flagship Design */
+.hairline-top {
+  border-top: 1px solid rgba(31, 41, 55, 0.08);
+}
+.hairline-bottom {
+  border-bottom: 1px solid rgba(31, 41, 55, 0.08);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(31, 41, 55, 0.05);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* CityMap ambient animation — CSS-driven (compositor only) instead of a
+   per-frame requestAnimationFrame + setState loop, which was forcing full
+   SVG re-renders/repaints on every frame and tanking mobile scroll perf. */
+@keyframes route-dash-march {
+  to { stroke-dashoffset: -17px; }
+}
+
+@keyframes hotspot-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(3.75); opacity: 0; }
+}
+
+.route-dash {
+  animation: route-dash-march 1.417s linear infinite;
+}
+
+.hotspot-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hotspot-pulse 11s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-dash,
+  .hotspot-ring {
+    animation: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Disable expensive SVG filters and non-composited animations on mobile to bypass layout repaint lag */
+@media (max-width: 1024px) {
+  svg filter, svg [filter] {
+    filter: none !important;
+  }
+  .route-dash,
+  .hotspot-ring {
+    animation: none !important;
+  }
+}
