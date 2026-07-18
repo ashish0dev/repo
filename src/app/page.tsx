@@ -17,6 +17,7 @@ const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const ScarcityStrip = dynamic(() => import("@/components/ScarcityStrip"));
 const FAQ = dynamic(() => import("@/components/FAQ"));
 const CityMap = dynamic(() => import("@/components/CityMap"), { ssr: false });
+const ProblemSection = dynamic(() => import("@/components/ProblemSection"));
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -31,15 +32,6 @@ const LEADERBOARD_DATA = [
   { name: "Meera M.", days: 5, you: false },
 ];
 
-const LIVE_LEDGER = [
-  { r: "Rohan S.", a: "claimed Hub Leader at", z: "Shivaji Park, Mumbai", s: "14d", t: "2m ago" },
-  { r: "Neha P.", a: "completed riverfront loop", z: "Sabarmati, Ahmedabad", s: "9d", t: "15m ago" },
-  { r: "Vikram A.", a: "extended streak at", z: "Lodhi Gardens, Delhi", s: "21d", t: "1h ago" },
-  { r: "Priya M.", a: "created first mark at", z: "Eco Park, Kolkata", s: "1d", t: "2h ago" },
-  { r: "Arjun K.", a: "secured top 3 ranking at", z: "Necklace Road, Hyderabad", s: "12d", t: "3h ago" },
-  { r: "Ananya D.", a: "secured top 3 ranking at", z: "Salt Lake, Kolkata", s: "18d", t: "4h ago" },
-  { r: "Kabir M.", a: "completed coastal path at", z: "Marine Drive, Kochi", s: "5d", t: "5h ago" },
-];
 
 const ROUTINES = {
   morning: {
@@ -99,7 +91,6 @@ export default function Home() {
   const phoneShowcaseRef = useRef<HTMLDivElement>(null);
 
   const galleryRef = useRef<HTMLDivElement>(null);
-  const ledgerRef = useRef<HTMLDivElement>(null);
 
   // Dynamic time detection
   const [timePeriod, setTimePeriod] = React.useState<"morning" | "afternoon" | "evening" | "night">("morning");
@@ -142,12 +133,12 @@ export default function Home() {
 
   // Auto-cycle mobile showcase screens every 2.0 seconds (resets dynamically on user manual tap)
   React.useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth >= 1024) return;
+    if (!isMobile) return;
     const timer = setTimeout(() => {
       setActiveScreenIndex((prev) => (prev + 1) % 4);
     }, 2000);
     return () => clearTimeout(timer);
-  }, [activeScreenIndex]);
+  }, [activeScreenIndex, isMobile]);
 
   const activeRoutine = ROUTINES[timePeriod];
 
@@ -160,9 +151,15 @@ export default function Home() {
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
-          end: "+=80%",
+          end: "bottom top",
           scrub: 1,
           pin: true,
+          snap: {
+            snapTo: 1,
+            duration: 0.6,
+            delay: 0.15,
+            ease: "power2.out"
+          },
           anticipatePin: 1,
         }
       });
@@ -190,6 +187,12 @@ export default function Home() {
           end: "+=200%",
           pin: true,
           scrub: 1,
+          snap: {
+            snapTo: [0, 0.33, 0.66, 1],
+            duration: 0.6,
+            delay: 0.15,
+            ease: "power1.inOut"
+          },
           anticipatePin: 1,
         }
       });
@@ -233,37 +236,41 @@ export default function Home() {
       }
     });
 
-      gsap.to(".gallery-track", {
-        xPercent: -65,
-        ease: "none",
-        scrollTrigger: {
-          trigger: galleryRef.current,
-          start: "top top",
-          end: "+=200%",
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-        }
-      });
-
-    /* ── SCENE 5: LIVE LEDGER TEXT THEME SWITCH ── */
-    ScrollTrigger.create({
-      trigger: ledgerRef.current,
-      start: "top 80px",
-      end: "bottom 80px",
-      onEnter: () => {
-        gsap.to(".nav-brand-text", { color: "#FFFFFF", duration: 0.2 });
-      },
-      onLeave: () => {
-        gsap.to(".nav-brand-text", { color: "#1F2937", duration: 0.2 });
-      },
-      onEnterBack: () => {
-        gsap.to(".nav-brand-text", { color: "#FFFFFF", duration: 0.2 });
-      },
-      onLeaveBack: () => {
-        gsap.to(".nav-brand-text", { color: "#1F2937", duration: 0.2 });
+    gsap.to(".gallery-track", {
+      xPercent: -65,
+      ease: "none",
+      scrollTrigger: {
+        trigger: galleryRef.current,
+        start: "top top",
+        end: "+=200%",
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
       }
     });
+
+    // ── SCENE 1: INITIAL HERO LOAD STAGGER ──
+    gsap.fromTo(".hero-content > *", 
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: "power4.out" }
+    );
+
+    // ── SCENE 6: FINAL CTA SCROLL ENTRANCE ──
+    gsap.fromTo("#waitlist .relative.z-20 > *", 
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        stagger: 0.15, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#waitlist",
+          start: "top 70%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
 
   }, { scope: container });
 
@@ -284,9 +291,18 @@ export default function Home() {
       <section ref={heroRef} className="min-h-screen lg:h-screen w-full relative flex items-center justify-center overflow-y-auto bg-[#FAFBFC] py-12 lg:py-0">
         {/* Map background */}
         <div className="absolute inset-0 w-full h-full">
-          <Image src="/horizontal-image.png" alt="Active city map background for mobile" fill priority className="object-cover md:hidden" />
-          <Image src="/tablet-image.png" alt="Active city map background for tablet" fill priority className="object-cover hidden md:block lg:hidden" />
-          <Image src="/map.png" alt="Active city map background" fill priority className="object-cover hidden lg:block" />
+          <picture>
+            <source media="(max-width: 767px)" srcSet="/protrait-image.png" />
+            <source media="(min-width: 768px) and (max-width: 1023px)" srcSet="/tablet-image.png" />
+            <source media="(min-width: 1024px)" srcSet="/horizontal-image.png" />
+            <img
+              src="/horizontal-image.png"
+              alt="Active city map background"
+              className="object-cover absolute inset-0 w-full h-full"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              fetchPriority="high"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-t from-[#FAFBFC] via-transparent to-transparent pointer-events-none" />
           {/* Radial mask to fade map details directly behind the text for maximum legibility */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,251,252,0.88)_18%,rgba(250,251,252,0.3)_62%,transparent_100%)] pointer-events-none" />
@@ -296,9 +312,9 @@ export default function Home() {
 
         <div className="hero-content relative z-10 flex flex-col items-center justify-center text-center px-6 mt-16 lg:mt-6 pointer-events-auto w-full max-w-[min(760px,92vw)] mx-auto">
           
-          <h1 className="font-display font-black leading-[0.98] tracking-tight text-center" style={{ fontSize: "clamp(48px, 8.5vw, 88px)" }}>
+          <h1 className="font-display font-black leading-[0.98] tracking-tight text-center uppercase" style={{ fontSize: "clamp(34px, 7.5vw, 84px)" }}>
             <span className="block text-[#1F2937]">What if</span>
-            <span className="block -mt-1 text-[#16A34A] italic" style={{ fontSize: "clamp(54px, 9vw, 92px)" }}>every workout</span>
+            <span className="block -mt-1 text-[#16A34A] italic whitespace-nowrap" style={{ fontSize: "clamp(36px, 8vw, 88px)" }}>every workout</span>
             <span className="block text-[#1F2937]">left a mark?</span>
           </h1>
           
@@ -316,6 +332,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* ── PROBLEM SECTION ────────────────────────────────────────── */}
+      <ProblemSection />
 
       {/* ── SCENE 2: APP SHOWCASE (APPLE STYLE) ───────────────────── */}
       <section ref={showcaseRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-start lg:justify-between py-4 lg:py-8 lg:h-screen">
@@ -845,34 +864,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SCENE 5: LIVE LEDGER ────────────────────────────────────── */}
-      <section ref={ledgerRef} className="bg-[#111] py-20 sm:py-28 text-white relative">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-5 lg:sticky lg:top-32 self-start">
-            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#16A34A] mb-4">Right Now</p>
-            <h3 className="font-display font-black leading-[0.9]" style={{ fontSize: "clamp(36px, 5vw, 68px)", letterSpacing: "-0.04em" }}>
-              India<br/>moving.
-            </h3>
-            <p className="text-gray-400 text-sm mt-6 max-w-sm font-sans leading-relaxed">Live check-ins from the community. All movement data is zone-anonymized to protect user privacy.</p>
-          </div>
-          
-          <div className="lg:col-span-7 divide-y divide-white/10 border-t border-b border-white/10">
-            {LIVE_LEDGER.map((log, i) => (
-              <div key={i} className="py-3 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="text-sm sm:text-base">
-                  <span className="font-bold text-white mr-2">{log.r}</span>
-                  <span className="text-gray-500 mr-2">{log.a}</span>
-                  <span className="font-bold text-[#16A34A] uppercase tracking-wide text-xs">{log.z}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="bg-[#16A34A]/20 text-[#16A34A] text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md">{log.s} streak</span>
-                  <span className="text-[9px] font-mono text-gray-500 whitespace-nowrap">{log.t}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* ── FAQ ────────────────────────────────────────────────────── */}
       <FAQ />

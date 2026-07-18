@@ -54,7 +54,7 @@ export default function HowItWorks() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="w-full bg-[#FAFBFC] py-20 sm:py-28 px-6">
+    <section ref={container} className="w-full bg-[#FAFBFC] py-14 sm:py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-[10px] text-[#16A34A] font-bold uppercase tracking-[0.25em] mb-3">How It Works</p>
