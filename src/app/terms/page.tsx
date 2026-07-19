@@ -13,7 +13,7 @@ export default function TermsPage() {
         </Link>
         
         <h1 className="font-display font-black text-4xl uppercase tracking-tight mb-8">Terms of Service</h1>
-        <p className="text-gray-500 text-sm mb-6 font-mono">Last updated: July 13, 2026</p>
+        <p className="text-gray-500 text-sm mb-6 font-mono">Last updated: July 12, 2026</p>
 
         <div className="space-y-6 text-sm text-gray-600 leading-relaxed font-sans">
           <p>
