@@ -69,10 +69,6 @@ export default function ValidationSurvey() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [completed, setCompleted] = useState(false);
-  
-  const marquee1 = useRef<HTMLDivElement>(null);
-  const marquee2 = useRef<HTMLDivElement>(null);
-  const marquee3 = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     gsap.fromTo(
@@ -90,12 +86,6 @@ export default function ValidationSurvey() {
         }
       }
     );
-
-    // Continuous Marquee animations
-    gsap.to(marquee1.current, { xPercent: -50, duration: 20, repeat: -1, ease: "linear" });
-    gsap.to(marquee2.current, { xPercent: 50, duration: 25, repeat: -1, ease: "linear" });
-    gsap.to(marquee3.current, { xPercent: -50, duration: 22, repeat: -1, ease: "linear" });
-
   }, { scope: container });
 
   const handleSelect = (option: string) => {

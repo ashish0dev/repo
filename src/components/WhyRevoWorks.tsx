@@ -4,7 +4,8 @@ import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { Sparkles, User, Award, TrendingUp, Users, Activity, Map, Trophy, Globe } from "lucide-react";
+import Image from "next/image";
+import { Sparkles, User, Award, TrendingUp, Users, Activity, Map, Trophy, Globe, ArrowUpRight } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -88,7 +89,9 @@ export default function WhyRevoWorks() {
             {/* Card 1 */}
             <div className="flow-step group w-[85vw] sm:w-[320px] md:w-auto flex-shrink-0 snap-center md:flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-white border border-gray-200/80 rounded-[32px] p-8 flex flex-col justify-between text-left shadow-[0_8px_30px_rgba(0,0,0,0.02)] md:shadow-none hover:shadow-[0_20px_60px_rgba(22,163,74,0.06)] relative overflow-hidden h-[300px] md:h-full cursor-pointer">
               {/* Giant Background Cartoon */}
-              <img src="/card1.jpg" alt="You" className="absolute -left-16 top-4 w-72 h-72 object-contain mix-blend-multiply opacity-15 transition-transform duration-700 group-hover:scale-110 pointer-events-none" />
+              <div className="absolute -left-16 top-4 w-72 h-72 mix-blend-multiply opacity-15 transition-transform duration-700 group-hover:scale-110 pointer-events-none">
+                <Image src="/card1.jpg" alt="You" fill sizes="(max-width: 768px) 288px, 288px" className="object-contain" />
+              </div>
               
               <span className="absolute -bottom-2 right-0 text-[120px] font-display font-black text-gray-100 leading-none select-none transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-2">1</span>
               <div className="w-12 h-12 rounded-full bg-[#16A34A]/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 relative z-10">
@@ -105,7 +108,9 @@ export default function WhyRevoWorks() {
             {/* Card 2 */}
             <div className="flow-step group w-[85vw] sm:w-[320px] md:w-auto flex-shrink-0 snap-center md:flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-gradient-to-br from-[#111] to-[#042f1a] border border-white/10 rounded-[32px] p-8 flex flex-col justify-between text-left shadow-xl h-[300px] md:h-full cursor-pointer relative overflow-hidden">
               {/* Giant Background Cartoon */}
-              <img src="/card2.jpg" alt="Recognition" className="absolute -left-16 top-4 w-72 h-72 object-contain mix-blend-screen invert opacity-15 transition-transform duration-700 group-hover:scale-110 pointer-events-none" />
+              <div className="absolute -left-16 top-4 w-72 h-72 mix-blend-screen invert opacity-15 transition-transform duration-700 group-hover:scale-110 pointer-events-none">
+                <Image src="/card2.jpg" alt="Recognition" fill sizes="(max-width: 768px) 288px, 288px" className="object-contain" />
+              </div>
               
               <span className="absolute -bottom-2 right-0 text-[120px] font-display font-black text-white/5 leading-none select-none transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-2">2</span>
               <div className="w-12 h-12 rounded-full bg-white/10 border border-white/5 flex items-center justify-center backdrop-blur-sm transition-transform duration-500 group-hover:scale-110 relative z-10">
@@ -123,7 +128,9 @@ export default function WhyRevoWorks() {
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none mix-blend-overlay" />
               
               {/* Giant Background Cartoon */}
-              <img src="/card3.jpg" alt="Progress" className="absolute -left-16 top-4 w-72 h-72 object-contain mix-blend-multiply opacity-20 transition-transform duration-700 group-hover:scale-110 pointer-events-none grayscale" />
+              <div className="absolute -left-16 top-4 w-72 h-72 mix-blend-multiply opacity-20 transition-transform duration-700 group-hover:scale-110 pointer-events-none grayscale">
+                <Image src="/card3.jpg" alt="Progress" fill sizes="(max-width: 768px) 288px, 288px" className="object-contain" />
+              </div>
               
               <span className="absolute -bottom-2 right-0 text-[120px] font-display font-black text-black/10 leading-none select-none transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-2">3</span>
               <div className="w-12 h-12 rounded-full bg-white/20 border border-white/10 flex items-center justify-center backdrop-blur-sm transition-transform duration-500 group-hover:scale-110 relative z-10">
@@ -139,7 +146,9 @@ export default function WhyRevoWorks() {
             {/* Card 4 */}
             <div className="flow-step group w-[85vw] sm:w-[320px] md:w-auto flex-shrink-0 snap-center md:flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] bg-white border border-gray-200/80 rounded-[32px] p-8 flex flex-col justify-between text-left shadow-[0_8px_30px_rgba(0,0,0,0.02)] md:shadow-none hover:shadow-[0_20px_60px_rgba(22,163,74,0.06)] relative overflow-hidden h-[300px] md:h-full cursor-pointer">
               {/* Giant Background Cartoon */}
-              <img src="/card4.jpg" alt="Community" className="absolute -left-16 top-4 w-72 h-72 object-contain mix-blend-multiply opacity-15 transition-transform duration-700 group-hover:scale-110 pointer-events-none" />
+              <div className="absolute -left-16 top-4 w-72 h-72 mix-blend-multiply opacity-15 transition-transform duration-700 group-hover:scale-110 pointer-events-none">
+                <Image src="/card4.jpg" alt="Community" fill sizes="(max-width: 768px) 288px, 288px" className="object-contain" />
+              </div>
               
               <span className="absolute -bottom-2 right-0 text-[120px] font-display font-black text-gray-100 leading-none select-none transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-2">4</span>
               <div className="w-12 h-12 rounded-full bg-[#16A34A]/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 relative z-10">

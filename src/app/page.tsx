@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -238,17 +238,20 @@ export default function Home() {
       }
     });
 
-    gsap.to(".gallery-track", {
-      xPercent: -65,
-      ease: "none",
-      scrollTrigger: {
-        trigger: galleryRef.current,
-        start: "top top",
-        end: "+=200%",
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
-      }
+    let galleryMm = gsap.matchMedia();
+    galleryMm.add("(min-width: 1024px)", () => {
+      gsap.to(".gallery-track", {
+        xPercent: -65,
+        ease: "none",
+        scrollTrigger: {
+          trigger: galleryRef.current,
+          start: "top top",
+          end: "+=200%",
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        }
+      });
     });
 
     // ── SCENE 1: INITIAL HERO LOAD STAGGER ──
@@ -276,6 +279,11 @@ export default function Home() {
 
   }, { scope: container });
 
+  const commonImg = { alt: "Active city map background", fill: true, priority: true, sizes: "100vw" };
+  const { props: { srcSet: portraitSrcSet } } = getImageProps({ ...commonImg, src: "/protrait-image.png" });
+  const { props: { srcSet: tabletSrcSet } } = getImageProps({ ...commonImg, src: "/tablet-image.png" });
+  const { props: { srcSet: horizontalSrcSet, ...restProps } } = getImageProps({ ...commonImg, src: "/horizontal-image.png" });
+
   return (
     <main ref={container} className="relative bg-[#FAFBFC] text-[#1F2937] overflow-x-hidden selection:bg-[#16A34A] selection:text-white">
       
@@ -294,12 +302,11 @@ export default function Home() {
         {/* Map background */}
         <div className="absolute inset-0 w-full h-full">
           <picture>
-            <source media="(max-width: 767px)" srcSet="/protrait-image.png" />
-            <source media="(min-width: 768px) and (max-width: 1023px)" srcSet="/tablet-image.png" />
-            <source media="(min-width: 1024px)" srcSet="/horizontal-image.png" />
+            <source media="(max-width: 767px)" srcSet={portraitSrcSet} />
+            <source media="(min-width: 768px) and (max-width: 1023px)" srcSet={tabletSrcSet} />
+            <source media="(min-width: 1024px)" srcSet={horizontalSrcSet} />
             <img
-              src="/horizontal-image.png"
-              alt="Active city map background"
+              {...restProps}
               className="object-cover absolute inset-0 w-full h-full"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               fetchPriority="high"
