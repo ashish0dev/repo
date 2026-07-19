@@ -18,6 +18,8 @@ const ScarcityStrip = dynamic(() => import("@/components/ScarcityStrip"));
 const FAQ = dynamic(() => import("@/components/FAQ"));
 const CityMap = dynamic(() => import("@/components/CityMap"), { ssr: false });
 const ProblemSection = dynamic(() => import("@/components/ProblemSection"));
+const WhyRevoWorks = dynamic(() => import("@/components/WhyRevoWorks"));
+const ValidationSurvey = dynamic(() => import("@/components/ValidationSurvey"));
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -25,6 +27,7 @@ if (typeof window !== "undefined") {
 }
 
 // ── DYNAMIC DATA STRUCTURES ──
+
 const LEADERBOARD_DATA = [
   { name: "Kiran R.", days: 14, you: true },
   { name: "Anjali P.", days: 9, you: false },
@@ -86,10 +89,8 @@ export default function Home() {
   // Refs
   const heroRef = useRef<HTMLDivElement>(null);
   const heroMapRef = useRef<HTMLDivElement>(null);
-  
   const showcaseRef = useRef<HTMLDivElement>(null);
   const phoneShowcaseRef = useRef<HTMLDivElement>(null);
-
   const galleryRef = useRef<HTMLDivElement>(null);
 
   // Dynamic time detection
@@ -151,9 +152,10 @@ export default function Home() {
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
-          end: "bottom top",
+          end: "+=50%",
           scrub: 1,
           pin: true,
+          pinSpacing: false,
           snap: {
             snapTo: 1,
             duration: 0.6,
@@ -336,13 +338,16 @@ export default function Home() {
       {/* ── PROBLEM SECTION ────────────────────────────────────────── */}
       <ProblemSection />
 
+      {/* ── WHY REVO WORKS ───────────────────────────────────────── */}
+      <WhyRevoWorks />
+
       {/* ── SCENE 2: APP SHOWCASE (APPLE STYLE) ───────────────────── */}
-      <section ref={showcaseRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-start lg:justify-between py-4 lg:py-8 lg:h-screen">
+      <section ref={showcaseRef} className="w-full relative bg-[#FAFBFC] overflow-visible flex flex-col justify-start lg:justify-between pt-12 pb-2 lg:py-16 lg:min-h-screen">
         {/* Subtle Coordinate Grid Background */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#1F2937 1px, transparent 1px), linear-gradient(90deg, #1F2937 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         
         {/* Header — in normal flex flow, never overlaps phone */}
-        <div className="relative w-full px-6 flex flex-col items-center text-center z-40 pointer-events-none shrink-0">
+        <div className="relative w-full px-6 flex flex-col items-center text-center z-40 pointer-events-none shrink-0 mb-12 lg:mb-16">
           <h2 className="font-display font-black leading-[0.88] text-[#1F2937] tracking-tight" style={{ fontSize: "clamp(22px, 3.5vw, 64px)" }}>
             Map your motion.
           </h2>
@@ -461,7 +466,7 @@ export default function Home() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-[#16A34A] rounded-[60px] blur-[80px] opacity-[0.12] -z-10 pointer-events-none" />
 
                 {/* Screen 1: Map */}
-                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] lg:transition-opacity lg:duration-300 ${activeScreenIndex === 0 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
+                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] ${activeScreenIndex === 0 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
                   {(!isMobile || activeScreenIndex === 0) && (
                     <>
                       <CityMap intensity={1} />
@@ -502,7 +507,7 @@ export default function Home() {
                 </div>
 
                 {/* Screen 2: Streak */}
-                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] lg:transition-opacity lg:duration-300 flex flex-col px-5 pt-[14%] pb-[18%] text-[#1F2937] ${activeScreenIndex === 1 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
+                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] flex flex-col px-5 pt-[14%] pb-[18%] text-[#1F2937] ${activeScreenIndex === 1 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
                   {(!isMobile || activeScreenIndex === 1) && (
                     <>
                       {/* Status Bar */}
@@ -560,7 +565,7 @@ export default function Home() {
                 </div>
 
                 {/* Screen 3: Leaderboard */}
-                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] lg:transition-opacity lg:duration-300 flex flex-col px-5 pt-[14%] pb-[18%] text-[#1F2937] ${activeScreenIndex === 2 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
+                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] flex flex-col px-5 pt-[14%] pb-[18%] text-[#1F2937] ${activeScreenIndex === 2 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
                   {(!isMobile || activeScreenIndex === 2) && (
                     <>
                       {/* Status Bar */}
@@ -610,7 +615,7 @@ export default function Home() {
                 </div>
 
                 {/* Screen 4: Shareable Card */}
-                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] lg:transition-opacity lg:duration-300 flex flex-col px-5 pt-[14%] pb-[18%] text-[#1F2937] ${activeScreenIndex === 3 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
+                <div className={`showcase-screen absolute inset-0 bg-[#FAFBFC] flex flex-col px-5 pt-[14%] pb-[18%] text-[#1F2937] ${activeScreenIndex === 3 ? "block lg:block lg:opacity-100" : "hidden lg:block lg:opacity-0"}`}>
                   {(!isMobile || activeScreenIndex === 3) && (
                     <>
                       {/* Status Bar */}
@@ -773,25 +778,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ───────────────────────────────────────────── */}
-      <HowItWorks />
 
-      {/* ── SCENE 3: MAP EXPANSION (Pure Map Moment) ─────────────── */}
-      {/* <section ref={mapMomentRef} className="h-screen w-full relative bg-[#060d1a] overflow-hidden flex items-center justify-center">
-        <div className="map-moment-scale absolute inset-0 w-full h-full origin-center">
-          <CityMap intensity={1} />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060d1a] via-transparent to-[#060d1a] opacity-80 pointer-events-none" />
-        <div className="relative z-10 text-center">
-          <p className="text-[10px] text-[#16A34A] font-bold uppercase tracking-[0.3em] mb-4">Nationwide Scale</p>
-          <h2 className="font-display font-black text-white leading-none" style={{ fontSize: "clamp(48px, 8vw, 120px)", letterSpacing: "-0.04em" }}>
-            India.<br/>Always on.
-          </h2>
-        </div>
-      </section> */}
+      {/* ── SCARCITY STRIP ─────────────────────────────────────────── */}
+      <div className="hidden lg:block">
+        <ScarcityStrip />
+      </div>
 
       {/* ── SCENE 4: HORIZONTAL EDITORIAL SPREAD ──────────────────── */}
-      <section ref={galleryRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-center py-12 lg:pt-28 lg:pb-16 lg:min-h-screen">
+      <section ref={galleryRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-center pt-4 pb-12 lg:pt-16 lg:pb-16 lg:min-h-screen">
         <div className="max-w-7xl mx-auto px-6 w-full mb-6 flex justify-between items-end">
           <div>
             <p className="text-[10px] text-[#16A34A] font-bold uppercase tracking-[0.25em] mb-2">{activeRoutine.tag}</p>
@@ -869,13 +863,13 @@ export default function Home() {
       {/* ── FAQ ────────────────────────────────────────────────────── */}
       <FAQ />
 
-      {/* ── SCARCITY STRIP ─────────────────────────────────────────── */}
-      <div className="py-6">
-        <ScarcityStrip />
-      </div>
+      {/* ── VALIDATION SURVEY ──────────────────────────────────────── */}
+      <ValidationSurvey />
+
+
 
       {/* ── SCENE 6: FINAL CTA (Waitlist) ─────────────────────────── */}
-      <section id="waitlist" className="relative min-h-screen flex flex-col justify-center items-center bg-[#FAFBFC] overflow-hidden py-20">
+      <section id="waitlist" className="relative flex flex-col justify-center items-center bg-[#FAFBFC] overflow-hidden py-24 lg:py-32">
         
         {/* Subtle background coordinate grid */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#1F2937 1px, transparent 1px), linear-gradient(90deg, #1F2937 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
@@ -886,11 +880,7 @@ export default function Home() {
 
         <div className="relative z-20 w-full max-w-2xl px-6 text-center flex flex-col items-center">
           
-          {/* Capsule Badge with Micro-border */}
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-gray-200/55 px-4 py-2 rounded-full mb-8 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-            <Lock className="w-2.5 h-2.5 text-[#16A34A]" />
-            <span className="text-[#16A34A] text-[9px] font-bold uppercase tracking-[0.2em] font-sans">Founding Members Waitlist</span>
-          </div>
+
 
           {/* Premium Headline with Brand Gradient */}
           <h2 className="font-display font-black text-[#1F2937] leading-[1.05] tracking-tight text-balance mb-2 uppercase" style={{ fontSize: "clamp(32px, 5.5vw, 68px)", letterSpacing: "-0.04em" }}>
@@ -922,8 +912,8 @@ export default function Home() {
           <div className="flex gap-6 text-[9px] font-bold uppercase tracking-widest text-gray-400">
             <Link href="/privacy" className="hover:text-[#16A34A] transition-colors cursor-pointer">Privacy</Link>
             <Link href="/terms" className="hover:text-[#16A34A] transition-colors cursor-pointer">Terms</Link>
-            <a href="#" className="hover:text-gray-900 transition-colors cursor-pointer">LinkedIn</a>
-            <a href="#" className="hover:text-gray-900 transition-colors cursor-pointer">Instagram</a>
+            <a href="https://www.linkedin.com/company/therevofitness" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors cursor-pointer">LinkedIn</a>
+            <a href="https://www.instagram.com/movewithrevo/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors cursor-pointer">Instagram</a>
           </div>
         </div>
       </footer>

@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { Lock } from "lucide-react";
+import { EyeOff, Activity, MapPin, Flame } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -12,198 +13,134 @@ if (typeof window !== "undefined") {
 
 export default function ProblemSection() {
   const container = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
+  const textWrapper = useRef<HTMLDivElement>(null);
+  const visualWrapper = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
-    // 1. Editorial Text Entry
+    // 1. Text Reveal Animation
     gsap.fromTo(
-      ".problem-text > *",
-      { opacity: 0, y: 20 },
+      ".problem-text-reveal > *",
+      { opacity: 0, y: 40, filter: "blur(10px)" },
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-
-    // 2. Map Canvas Slide-up
-    gsap.fromTo(
-      ".problem-map-canvas",
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
+        filter: "blur(0px)",
         duration: 1.2,
+        stagger: 0.15,
         ease: "power3.out",
         scrollTrigger: {
           trigger: container.current,
-          start: "top 70%",
-          toggleActions: "play none none none",
+          start: "top 75%",
+          toggleActions: "play reverse play reverse",
         },
       }
     );
 
-    // 3. Subtle Line Drawing Animation (Scroll Scrubbed)
-    if (svgRef.current) {
-      const paths = svgRef.current.querySelectorAll(".spatial-path");
-      
-      gsap.fromTo(
-        paths,
-        { strokeDasharray: "1000", strokeDashoffset: "1000" },
-        {
-          strokeDashoffset: "0",
-          scrollTrigger: {
-            trigger: container.current,
-            start: "top 60%",
-            end: "bottom 30%",
-            scrub: 1.2,
-          },
-        }
-      );
+    // 2. Visual Side Reveal
+    gsap.fromTo(
+      visualWrapper.current,
+      { opacity: 0, x: 50, scale: 0.95 },
+      {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        duration: 1.5,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 70%",
+          toggleActions: "play reverse play reverse",
+        },
+      }
+    );
 
-      // Pulse the isolated user nodes
-      gsap.fromTo(
-        ".user-pulse",
-        { scale: 0.8, opacity: 0.2 },
-        {
-          scale: 1.3,
-          opacity: 0,
-          duration: 2.5,
-          repeat: -1,
-          stagger: 0.5,
-          ease: "sine.out",
-        }
-      );
-    }
+    // 3. Image Parallax
+    gsap.fromTo(
+      imageRef.current,
+      { scale: 1.1, y: -20 },
+      {
+        scale: 1,
+        y: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      }
+    );
+
   }, { scope: container });
 
   return (
     <section
       ref={container}
-      className="w-full relative bg-[#FAFBFC] py-20 sm:py-32 px-6 border-b border-gray-100 overflow-hidden"
+      className="w-full relative bg-[#FAFBFC] pt-0 lg:pt-36 pb-20 lg:pb-40 border-b border-gray-100 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="w-full lg:max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-0 lg:gap-12 items-center relative z-10">
         
-        {/* Left Column: Editorial Copy */}
-        <div className="lg:col-span-5 space-y-6 problem-text text-left">
-          <div className="inline-flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full">
-            <Lock className="w-3.5 h-3.5 text-gray-400" />
-            <span className="text-gray-500 text-[9px] font-bold uppercase tracking-[0.25em] font-sans">
-              The Tension
-            </span>
-          </div>
-
-          <h2
-            className="font-display font-black text-[#1F2937] leading-[1.02] tracking-tight uppercase"
-            style={{ fontSize: "clamp(32px, 4.5vw, 54px)", letterSpacing: "-0.04em" }}
-          >
-            We share the streets, <br />
-            <span className="text-gray-300">yet we run alone.</span>
-          </h2>
-
-          <p className="text-base sm:text-lg font-light text-[#4B5563] leading-relaxed max-w-md">
-            Traditional fitness trackers focus on hyper-competition, leaving average movers behind. If you break your streak, you feel guilty. If you are ranked #427 in your neighbourhood, you feel demotivated.
-          </p>
-
-          <p className="text-sm font-semibold text-gray-400 leading-relaxed max-w-sm">
-            Plus, broadcasting your exact running route online is a safety risk. We run in isolation, invisible to each other.
-          </p>
+        {/* IMAGE (Top on Mobile, Right on Desktop) */}
+        <div ref={visualWrapper} className="order-1 lg:order-2 w-full lg:w-auto relative aspect-[4/3] lg:aspect-square lg:rounded-3xl overflow-hidden lg:shadow-[0_20px_50px_rgba(0,0,0,0.08)] lg:bg-white lg:border lg:border-gray-100 lg:p-4">
+           <div className="relative w-full h-full lg:rounded-2xl overflow-hidden bg-gray-100">
+             <Image
+               ref={imageRef}
+               src="/theme-cartoon.jpg"
+               alt="Premium 3D rendering showing a runner isolated with their phone in a vibrant city"
+               fill
+               className="object-cover opacity-95"
+               priority
+             />
+             
+             {/* Desktop Edge fade */}
+             <div className="hidden lg:block absolute inset-0 shadow-[inset_0_0_40px_rgba(255,255,255,1)] pointer-events-none rounded-2xl" />
+             {/* Mobile Bottom Fade to blend seamlessly with overlapping text card */}
+             <div className="block lg:hidden absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#FAFBFC] via-[#FAFBFC]/90 to-transparent pointer-events-none" />
+           </div>
         </div>
 
-        {/* Right Column: Clean Architectural Spatial Diagram */}
-        <div className="lg:col-span-7 flex justify-center items-center">
-          <div className="problem-map-canvas w-full max-w-[560px] aspect-[4/3] rounded-[32px] bg-white border border-gray-150 shadow-[0_4px_30px_rgba(0,0,0,0.015)] relative overflow-hidden p-8 flex items-center justify-center">
+        {/* TEXT OVERLAP CARD (Bottom on Mobile, Left on Desktop) */}
+        <div ref={textWrapper} className="order-2 lg:order-1 problem-text-reveal flex flex-col items-start w-full lg:max-w-2xl relative z-20 -mt-16 lg:mt-0">
+          
+          {/* Premium Mobile Card: Solid white, rounded top, shadow, centered text */}
+          <div className="w-full relative bg-white lg:bg-transparent pt-10 pb-12 px-6 sm:px-12 lg:px-0 lg:pt-0 lg:pb-0 rounded-t-[40px] lg:rounded-none shadow-[0_-15px_40px_rgba(0,0,0,0.06)] lg:shadow-none flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            {/* Grid overlay */}
-            <div 
-              className="absolute inset-0 opacity-[0.015] pointer-events-none" 
-              style={{ 
-                backgroundImage: 'linear-gradient(#1F2937 1px, transparent 1px), linear-gradient(90deg, #1F2937 1px, transparent 1px)', 
-                backgroundSize: '36px 36px' 
-              }} 
-            />
+            {/* Minimal Label */}
 
-            {/* Custom Spatial Design SVG */}
-            <svg
-              ref={svgRef}
-              viewBox="0 0 400 300"
-              className="w-full h-full relative z-10"
-              preserveAspectRatio="xMidYMid meet"
+
+            {/* Powerful Headline */}
+            <h2
+              className="font-display font-black text-[#1F2937] leading-[1.05] tracking-tight uppercase mb-6"
+              style={{ fontSize: "clamp(38px, 9vw, 68px)" }}
             >
-              {/* Minimal Coordinate Grid */}
-              <g stroke="rgba(31, 41, 55, 0.03)" strokeWidth="0.8">
-                <line x1="0" y1="75" x2="400" y2="75" />
-                <line x1="0" y1="150" x2="400" y2="150" />
-                <line x1="0" y1="225" x2="400" y2="225" />
-                <line x1="100" y1="0" x2="100" y2="300" />
-                <line x1="200" y1="0" x2="200" y2="300" />
-                <line x1="300" y1="0" x2="300" y2="300" />
-              </g>
+              YOUR PHONE KNOWS. <br />
+              <span className="text-[#16A34A]">THE CITY DOESN'T.</span>
+            </h2>
 
-              {/* Connected reference dot lines */}
-              <g stroke="rgba(31, 41, 55, 0.05)" strokeWidth="1" strokeDasharray="4 4">
-                <line x1="80" y1="90" x2="280" y2="210" />
-                <line x1="280" y1="90" x2="150" y2="220" />
-              </g>
+            {/* Minimal Subtext */}
+            <p className="text-base sm:text-xl font-medium text-gray-500 leading-relaxed mb-10 max-w-lg">
+              You crush your PRs. You hit your daily goals.<br className="hidden sm:block" />
+              But the moment you look up from your screen, your effort vanishes.<br className="hidden sm:block" />
+              Your hard work leaves <strong className="text-gray-900 font-bold">zero trace</strong> in the real world.
+            </p>
 
-              {/* Running Paths (Thin, organic grey curves drawn on scroll) */}
-              <g fill="none" strokeWidth="2" strokeLinecap="round">
-                {/* Loop 1 */}
-                <path
-                  className="spatial-path"
-                  d="M 50,110 C 70,70 120,60 110,120 C 100,180 50,160 50,110"
-                  stroke="rgba(31, 41, 55, 0.15)"
-                />
-                {/* Loop 2 */}
-                <path
-                  className="spatial-path"
-                  d="M 250,70 C 290,40 350,70 320,120 C 290,170 230,130 250,70"
-                  stroke="rgba(31, 41, 55, 0.15)"
-                />
-                {/* Loop 3 */}
-                <path
-                  className="spatial-path"
-                  d="M 120,230 C 180,260 220,240 260,200"
-                  stroke="rgba(31, 41, 55, 0.15)"
-                />
-              </g>
-
-              {/* User Nodes (Solid nodes representing isolated movers) */}
-              {/* User 1 */}
-              <g>
-                <circle cx="80" cy="90" r="5" fill="#4B5563" />
-                <circle className="user-pulse" cx="80" cy="90" r="14" fill="none" stroke="#4B5563" strokeWidth="1" />
-                <text x="80" y="74" fill="#9CA3AF" fontSize="6.5" fontFamily="monospace" letterSpacing="0.05em" textAnchor="middle">ID: 08A_SOLO</text>
-              </g>
-
-              {/* User 2 */}
-              <g>
-                <circle cx="280" cy="90" r="5" fill="#4B5563" />
-                <circle className="user-pulse" cx="280" cy="90" r="14" fill="none" stroke="#4B5563" strokeWidth="1" />
-                <text x="280" y="74" fill="#9CA3AF" fontSize="6.5" fontFamily="monospace" letterSpacing="0.05em" textAnchor="middle">ID: 14D_SOLO</text>
-              </g>
-
-              {/* User 3 */}
-              <g>
-                <circle cx="150" cy="220" r="5" fill="#4B5563" />
-                <circle className="user-pulse" cx="150" cy="220" r="14" fill="none" stroke="#4B5563" strokeWidth="1" />
-                <text x="150" y="240" fill="#9CA3AF" fontSize="6.5" fontFamily="monospace" letterSpacing="0.05em" textAnchor="middle">ID: 02C_SOLO</text>
-              </g>
-
-              {/* Tiny subtle center badge indicating unconnected grid */}
-              <g transform="translate(200, 150)">
-                <rect x="-42" y="-9" width="84" height="18" rx="9" fill="#FAFBFC" stroke="rgba(31, 41, 55, 0.08)" strokeWidth="1" />
-                <text x="0" y="3" fill="#9CA3AF" fontSize="6" fontFamily="monospace" fontWeight="bold" textAnchor="middle" letterSpacing="0.05em">UNCONNECTED</text>
-              </g>
-            </svg>
-
+            {/* Insight */}
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-10 border-t border-gray-100 pt-8 w-full lg:w-auto">
+               <div className="flex flex-col items-center lg:items-start gap-2">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] font-bold text-[#16A34A] uppercase tracking-widest font-mono">Digital Record</span>
+                    <span className="text-2xl font-black text-[#16A34A]">✓</span>
+                  </div>
+               </div>
+               <div className="w-full h-[1px] sm:w-[1px] sm:h-10 bg-gray-100" />
+               <div className="flex flex-col items-center lg:items-start gap-2">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest font-mono">Physical Mark</span>
+                    <span className="text-2xl font-black text-gray-400">✕</span>
+                  </div>
+               </div>
+            </div>
           </div>
         </div>
 
