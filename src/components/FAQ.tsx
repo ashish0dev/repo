@@ -9,20 +9,24 @@ const FAQS = [
     a: "Yes. Revo is free to join and free to use. Founding members get early access and a permanent badge, but there's no paywall to run, walk, or show up on your local grid.",
   },
   {
-    q: "When does it launch?",
-    a: "We're rolling out city by city, starting with our founding waitlist members. Join now to get an early invite as we open up your neighbourhood.",
+    q: "What makes REVO different from other fitness apps?",
+    a: "Most fitness apps only track your workouts. REVO makes every activity visible, recognized, and connected to your local community, turning consistency into something rewarding.",
   },
   {
-    q: "Do walkers count?",
-    a: "Yes — walkers count exactly the same as runners. Revo rewards showing up and staying consistent, not pace. Beginners are first-class citizens on the grid.",
+    q: "Which activities can I track?",
+    a: "Whether you run, walk, cycle, work out, hike, or play sports, every movement contributes to your progress and your city's active map.",
   },
   {
-    q: "Is my exact route public?",
-    a: "No. Your precise route stays private. Revo only shows area-level activity — your neighbourhood's heatmap and leaderboard — never your exact path or live location.",
+    q: "Is my exact location shared?",
+    a: "Never. Your precise location and routes stay private. REVO only displays community-level activity while keeping your personal data secure.",
   },
   {
-    q: "Which areas are supported at launch?",
-    a: "We're launching in select high-demand zones first. If you and your friends join the waitlist, your neighbourhood gets unlocked faster. Invite your squad to claim your turf early.",
+    q: "Do I need a smartwatch to use REVO?",
+    a: "No. REVO works with your smartphone, and support for popular smartwatches and fitness devices will be available as we expand.",
+  },
+  {
+    q: "When will REVO be available?",
+    a: "We're currently building REVO and rolling out access in phases. Join the waitlist to get early access and help shape the future of the platform.",
   },
 ];
 
