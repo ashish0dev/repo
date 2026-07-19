@@ -14,52 +14,52 @@ if (typeof window !== "undefined") {
 const QUESTIONS = [
   {
     id: 1,
-    question: "Aap apna walk ya run track kaise karte ho aaj kal?",
+    question: "How do you usually track your fitness activities?",
     options: [
-      "Strava ya Nike Run Club (NRC)",
-      "Smartwatch (Apple, Garmin, FitBit)",
-      "Koi tracking nahi, just normal walk/run",
-      "Pehle karta tha, ab chhod diya (Lapsed)"
+      "Using a fitness app (e.g., Strava, Nike Run Club)",
+      "Using a smartwatch (Apple Watch, Garmin, Fitbit, etc.)",
+      "I used to track them, but not anymore",
+      "I don't track my activities"
     ]
   },
   {
     id: 2,
-    question: "Sabse bada problem kya hai consistent rehne mein?",
+    question: "What is the biggest challenge that prevents you from staying consistent with your workouts?",
     options: [
-      "Akele bhagna boring lagta hai",
-      "Tracking apps bahut serious/pressure wale hain",
-      "Safety aur route privacy ka tension",
-      "Time ki kami ya motivation nahi hai"
+      "Working out alone feels boring",
+      "Fitness tracking apps feel too competitive or overwhelming",
+      "I'm concerned about privacy when sharing my activities",
+      "Lack of time or motivation"
     ]
   },
   {
     id: 3,
-    question: "Agar exact route private rahe, toh kya apni activity share karoge?",
+    question: "How comfortable are you with sharing your fitness activities?",
     options: [
-      "Haan, privacy-first hona bahot zaruri hai",
-      "Shayad, depend karta hai kon dekh raha hai",
-      "Mujhe farq nahi padta, bindass share karunga",
-      "Nahi, main 100% private hi rakhta hu"
+      "Only if I have full control over who can see them",
+      "I'm comfortable sharing with friends or followers",
+      "I'm comfortable sharing publicly",
+      "I prefer to keep all my activities private"
     ]
   },
   {
     id: 4,
-    question: "Personal stats ke alawa kya cheez zyada motivate karegi?",
+    question: "Which of the following would motivate you the most to stay consistent with your fitness journey?",
     options: [
-      "Mere neighborhood ka heatmap glow hote dekhna",
-      "Local café se free coffee / discounts jeetna",
-      "Leaderboards par apne doston ko harana",
-      "Sirf khud ka personal discipline"
+      "Tracking my personal goals and progress",
+      "Competing with friends and climbing leaderboards",
+      "Earning rewards and exclusive offers from local businesses",
+      "Joining fun fitness challenges and community events"
     ]
   },
   {
     id: 5,
-    question: "Kya aap apna existing app (Strava/Health) sync karoge Revo ke sath?",
+    question: "If a new fitness app made staying active feel more fun, social, and rewarding, would you consider switching?",
     options: [
-      "Haan, background mein sync hona best hai",
-      "Nahi, mujhe ek alag hi naya app chahiye",
-      "Agar mere dost bhi sync karenge toh haan",
-      "Pehle app banne do, phir sochunga!"
+      "Yes, I'd switch",
+      "I'd try it alongside my current app",
+      "Maybe, depending on the features",
+      "No, I'm happy with my current app"
     ]
   }
 ];
@@ -98,7 +98,7 @@ export default function ValidationSurvey() {
       setCompleted(true);
       try {
         localStorage.setItem("revo_validation_survey", JSON.stringify(updated));
-      } catch {}
+      } catch { }
     }
   };
 
@@ -113,10 +113,10 @@ export default function ValidationSurvey() {
       {/* Massive Black Silhouette (True Transparent PNG) */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex justify-center items-center">
         <div className="relative w-full max-w-[900px] aspect-square opacity-60">
-          <Image 
-            src="/real-transparent-runner.png" 
-            alt="Athlete Runner Silhouette" 
-            fill 
+          <Image
+            src="/real-transparent-runner.png"
+            alt="Athlete Runner Silhouette"
+            fill
             className="object-contain object-bottom lg:object-right-bottom drop-shadow-2xl"
           />
         </div>
@@ -126,16 +126,16 @@ export default function ValidationSurvey() {
       </div>
 
       <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center relative z-10">
-        
+
         {/* Left Column: Bold Typography */}
         {/* Left Column: Bold Typography */}
         <div className="flex flex-col items-start text-left drop-shadow-xl lg:col-span-6 lg:pr-8 z-10 relative">
 
 
           <h2 className="font-display font-black text-white leading-[0.85] tracking-tighter uppercase mb-6 lg:mb-8 text-[4rem] sm:text-7xl lg:text-[5.5rem]">
-            START<br/>THE<br/><span className="text-black">REVO.</span>
+            START<br />THE<br /><span className="text-black">REVO.</span>
           </h2>
-          
+
           <p className="text-base sm:text-lg font-medium text-white/95 leading-relaxed max-w-md drop-shadow-md">
             Revo is dropping in select neighborhoods first. Tell us how you move, and we'll prioritize your area for early access.
           </p>
@@ -149,10 +149,10 @@ export default function ValidationSurvey() {
 
         {/* Right Column: Clean Compact White Card */}
         <div className="w-full mx-auto max-w-md lg:max-w-lg lg:ml-auto survey-box bg-white/95 backdrop-blur-2xl rounded-[24px] lg:rounded-[32px] p-5 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.4)] relative overflow-hidden text-left flex flex-col justify-between border border-white/40 lg:col-span-6">
-          
+
           {/* Sleek Progress Bar */}
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-black/10">
-            <div 
+            <div
               className="h-full bg-black transition-all duration-700 ease-out"
               style={{ width: `${completedPercent}%` }}
             />
@@ -160,7 +160,7 @@ export default function ValidationSurvey() {
 
           {!completed ? (
             <div key={currentIdx} className="survey-content-card flex-1 flex flex-col animate-fade-in justify-center mt-4">
-              
+
               <div className="flex justify-between items-center text-[10px] font-mono font-bold uppercase tracking-[0.2em] mb-6">
                 <span className="text-gray-400">Question {currentIdx + 1} of {QUESTIONS.length}</span>
                 <span className="text-white bg-black px-3 py-1 rounded-full shadow-md">{Math.round(progressPercent)}% Done</span>
