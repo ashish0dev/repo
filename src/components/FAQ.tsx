@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 const FAQS = [
   {
     q: "Is Revo free?",
-    a: "Yes. Revo is free to join and free to use. Founding members get early access and a permanent badge, but there's no paywall to run, walk, or show up on your local grid.",
+    a: "Yes. Revo is free to join and free to use. Founding members get early access and a permanent badge, but there's no paywall to complete workouts, or show up on your local grid.",
   },
   {
     q: "What makes REVO different from other fitness apps?",
@@ -14,7 +14,7 @@ const FAQS = [
   },
   {
     q: "Which activities can I track?",
-    a: "Whether you run, walk, cycle, work out, hike, or play sports, every movement contributes to your progress and your city's active map.",
+      a: "Revo supports running, walking, cycling, workouts, hiking, and many other fitness activities. Every activity contributes to your personal progress and helps build a more active community.",
   },
   {
     q: "Is my exact location shared?",
