@@ -1,8 +1,15 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Read the REVO Privacy Policy to understand how we secure and manage your location data and account details for community fitness visibility.",
+  alternates: {
+    canonical: "https://revo.origina.in/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (

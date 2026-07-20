@@ -1,8 +1,15 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Read the REVO Terms of Service regarding early beta access, reserving your founding username, and location tracking policies.",
+  alternates: {
+    canonical: "https://revo.origina.in/terms",
+  },
+};
 
 export default function TermsPage() {
   return (

@@ -12,6 +12,62 @@ import { Flame, MapPin, Activity, Navigation, Users, Lock, Globe, Share2 } from 
 import { WAITLIST_BASE_COUNT } from "@/lib/config";
 import { track } from "@/lib/analytics";
 import dynamic from "next/dynamic";
+import JsonLd from "@/components/JsonLd";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Revo free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Revo is free to join and free to use. Founding members get early access and a permanent badge, but there's no paywall to complete workouts, or show up on your local grid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes REVO different from other fitness apps?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most fitness apps only track your workouts. REVO makes every activity visible, recognized, and connected to your local community, turning consistency into something rewarding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which activities can I track?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Revo supports running, walking, cycling, workouts, hiking, and many other fitness activities. Every activity contributes to your personal progress and helps build a more active community."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my exact location shared?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never. Your precise location and routes stay private. REVO only displays community-level activity while keeping your personal data secure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a smartwatch to use REVO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. REVO works with your smartphone, and support for popular smartwatches and fitness devices will be available as we expand."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When will REVO be available?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We're currently building REVO and rolling out access in phases. Join the waitlist to get early access and help shape the future of the platform."
+      }
+    }
+  ]
+};
 
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const ScarcityStrip = dynamic(() => import("@/components/ScarcityStrip"));
@@ -320,6 +376,7 @@ export default function Home() {
         </div>
 
         <div className="hero-content relative z-10 flex flex-col items-center justify-center text-center px-6 mt-16 lg:mt-6 pointer-events-auto w-full max-w-[min(760px,92vw)] mx-auto">
+          <JsonLd schema={faqSchema} />
           
           <h1 className="font-display font-black leading-[0.98] tracking-tight text-center uppercase" style={{ fontSize: "clamp(34px, 7.5vw, 84px)" }}>
             <span className="block text-[#1F2937]">What if</span>
@@ -331,7 +388,15 @@ export default function Home() {
             not just on you, but on <span className="text-[#16A34A] font-semibold">your city.</span>
           </p>
 
-          <div id="hero-waitlist" className="mt-10 lg:mt-6 w-full max-w-sm scroll-mt-32">
+          {/* AI-Optimized GEO Brand Definition Block */}
+          <div className="mt-8 p-6 bg-white/80 backdrop-blur-md rounded-2xl border border-gray-200/60 max-w-lg text-left shadow-[0_12px_40px_rgba(0,0,0,0.02)]">
+            <h2 className="text-[10px] font-bold text-[#16A34A] uppercase tracking-[0.2em] mb-2">What is REVO?</h2>
+            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-sans">
+              <strong>REVO</strong> is a community fitness visibility movement from India. We transform everyday physical activities—like running, walking, or cycling—into shared, visible marks on a live neighborhood map. Unlike traditional fitness tracking apps that focus on private stats and competition, REVO makes consistency and community effort visible to encourage local connection.
+            </p>
+          </div>
+
+          <div id="hero-waitlist" className="mt-8 lg:mt-6 w-full max-w-sm scroll-mt-32">
             <WaitlistForm />
           </div>
 
