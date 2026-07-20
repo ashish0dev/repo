@@ -70,6 +70,15 @@ export default function ValidationSurvey() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [completed, setCompleted] = useState(false);
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash === "#survey") {
+      const timer = setTimeout(() => {
+        container.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   useGSAP(() => {
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       // Set values immediately for mobile to bypass ScrollTrigger registration overhead
@@ -126,6 +135,7 @@ export default function ValidationSurvey() {
 
   return (
     <section
+      id="survey"
       ref={container}
       className="w-full relative bg-[#16A34A] py-20 lg:py-12 px-5 sm:px-6 overflow-hidden flex items-center min-h-[100dvh] lg:h-[100dvh]"
     >
