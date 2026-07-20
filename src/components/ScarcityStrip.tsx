@@ -15,6 +15,12 @@ export default function ScarcityStrip() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      // Set values immediately for mobile to bypass ScrollTrigger registration overhead
+      gsap.set(".scarcity-card", { opacity: 1, y: 0, scale: 1 });
+      return;
+    }
+
     gsap.fromTo(
       ".scarcity-card",
       { opacity: 0, y: 30, scale: 0.98 },

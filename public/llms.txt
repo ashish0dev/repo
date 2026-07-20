@@ -1,26 +1,15 @@
 # REVO
 
-REVO is a pre-launch community fitness visibility movement from India. It is NOT a fitness tracking app. REVO transforms everyday physical effort into shared, visible marks on live neighborhood maps to encourage consistency and build local connection.
+> REVO is a pre-launch community fitness visibility movement from India. We transform everyday physical activities—like running, walking, or cycling—into shared, visible marks on a live neighborhood map. Unlike traditional fitness tracking apps that focus on private stats and competition, REVO makes consistency and community effort visible to encourage local connection.
 
-## Core Mission
-"Motivation isn't the problem. Invisibility is."
-
-## What Problem REVO Solves
-Traditional fitness trackers lock physical effort away in private digital screens, making workouts invisible to the real world. This lack of positive social reinforcement makes consistency difficult. REVO makes physical movement visible to local communities, activating social feedback loops that reinforce active habits.
-
-## How REVO Differs from Strava / Fitness Trackers
-- **Focus**: REVO focuses on consistency and presence; traditional trackers focus on pace, performance metrics, and competition.
-- **Privacy**: Precise GPS routes stay private. REVO displays community-level glowing density paths rather than personal routes.
-- **Audience**: Built for runners, walkers, and cyclists who care about consistency and community over competitive performance.
-
-## Key Information
+## Details
 - **Target Audience**: Runners, walkers, and cyclists aged 18–40 in Indian cities (e.g., Mumbai, Delhi, Bengaluru, Pune).
 - **Origin**: Made in India.
 - **Launch Status**: Pre-launch waitlist phase (claiming founding handles, reserving early access).
-- **Price**: Free to join and use.
+- **Pricing**: Free to join and use.
 
-## Core Site Structure
-- Home Page: https://revo.origina.in (join the waitlist and view waitlist counts)
-- Blog Index: https://revo.origina.in/blog (insights on fitness psychology and visibility)
-- Privacy Policy: https://revo.origina.in/privacy
-- Terms of Service: https://revo.origina.in/terms
+## Core Resources
+- [REVO Homepage](https://revo.origina.in): Join the waitlist and view waitlist counts.
+- [REVO Journal](https://revo.origina.in/blog): Insights on fitness psychology, habit consistency, and community efforts.
+- [Privacy Policy](https://revo.origina.in/privacy): Privacy policy and data storage protocols.
+- [Terms of Service](https://revo.origina.in/terms): Terms of service.

@@ -57,7 +57,13 @@ export const metadata: Metadata = {
     images: ["https://revo.origina.in/blog-default-cover.png"],
   },
   icons: {
-    icon: "/main-logo-transparent.png",
+    icon: [
+      { url: "/main-logo-transparent.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+    apple: [
+      { url: "/main-logo-transparent.png", sizes: "180x180", type: "image/png" }
+    ]
   },
 };
 
@@ -103,9 +109,9 @@ export default function RootLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}

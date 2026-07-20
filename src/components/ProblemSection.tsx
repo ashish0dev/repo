@@ -18,6 +18,14 @@ export default function ProblemSection() {
   const imageRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      // Set values immediately for mobile to bypass ScrollTrigger registration overhead
+      gsap.set(".problem-text-reveal > *", { opacity: 1, y: 0, filter: "none" });
+      gsap.set(visualWrapper.current, { opacity: 1, x: 0, scale: 1 });
+      gsap.set(imageRef.current, { scale: 1, y: 0 });
+      return;
+    }
+
     // 1. Text Reveal Animation
     gsap.fromTo(
       ".problem-text-reveal > *",

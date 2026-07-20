@@ -281,9 +281,9 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           <aside className="lg:col-span-4 lg:sticky lg:top-8 bg-gray-50/50 border border-gray-100 rounded-3xl p-6 sm:p-8">
             {post.toc.length > 0 && (
               <div className="mb-8">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4 pb-2 border-b border-gray-200/50">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4 pb-2 border-b border-gray-200/50">
                   On this page
-                </h3>
+                </h2>
                 <nav className="flex flex-col gap-3">
                   {post.toc.map((heading) => (
                     <a
@@ -301,9 +301,9 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             )}
 
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4 pb-2 border-b border-gray-200/50">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4 pb-2 border-b border-gray-200/50">
                 Share this story
-              </h3>
+              </h2>
               <div className="flex gap-2">
                 <a
                   href={`https://wa.me/?text=Check out: ${post.frontmatter.title} at https://revo.origina.in/blog/${post.frontmatter.slug}`}
@@ -329,9 +329,9 @@ export default async function BlogPostPage({ params }: PostPageProps) {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <section className="mt-24 pt-16 border-t border-gray-100">
-            <h3 className="font-display font-black text-2xl text-[#1F2937] uppercase tracking-tight mb-8">
+            <h2 className="font-display font-black text-2xl text-[#1F2937] uppercase tracking-tight mb-8">
               Read next
-            </h3>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.map((related) => (
                 <div key={related.frontmatter.slug} className="flex flex-col group">
@@ -347,11 +347,11 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                   <div className="flex items-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-wider mb-2">
                     <span>{new Date(related.frontmatter.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
                   </div>
-                  <h4 className="font-display font-black text-lg text-[#1F2937] uppercase leading-tight group-hover:text-[#2E7D5B] transition-colors line-clamp-2">
+                  <h3 className="font-display font-black text-lg text-[#1F2937] uppercase leading-tight group-hover:text-[#2E7D5B] transition-colors line-clamp-2">
                     <Link href={`/blog/${related.frontmatter.slug}`}>
                       {related.frontmatter.title}
                     </Link>
-                  </h4>
+                  </h3>
                 </div>
               ))}
             </div>

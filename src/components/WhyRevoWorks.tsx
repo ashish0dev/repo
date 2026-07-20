@@ -15,6 +15,13 @@ export default function WhyRevoWorks() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      // Set values immediately for mobile to bypass ScrollTrigger registration overhead
+      gsap.set(".why-revo-text > *", { opacity: 1, y: 0 });
+      gsap.set(".flow-step", { opacity: 1, y: 0, scale: 1, rotateX: 0 });
+      return;
+    }
+
     // 1. Text animations
     gsap.fromTo(
       ".why-revo-text > *",
@@ -63,8 +70,6 @@ export default function WhyRevoWorks() {
         
         {/* Header Block */}
         <div className="why-revo-text space-y-4 max-w-2xl mb-8 sm:mb-10">
-
-
           <h2
             className="font-display font-black text-[#1F2937] leading-[1.05] tracking-tight uppercase"
             style={{ fontSize: "clamp(32px, 5vw, 54px)", letterSpacing: "-0.04em" }}
@@ -100,7 +105,7 @@ export default function WhyRevoWorks() {
               {/* Fixed width container prevents text cramping */}
               <div className="mt-auto relative z-10 w-[260px]">
                 <span className="text-[#16A34A] text-[10px] font-mono font-bold uppercase tracking-widest block mb-2 opacity-0 -translate-y-4 transition-all duration-500 delay-100 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:hidden block">Step 01</span>
-                <h4 className="font-display font-black text-[#1F2937] text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Your<br/>Movement</h4>
+                <h3 className="font-display font-black text-[#1F2937] text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Your<br/>Movement</h3>
                 <p className="text-gray-500 text-xs md:text-sm leading-relaxed opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-150">Every step counts. Connect your tracker and let your daily walks or runs fuel your journey.</p>
               </div>
             </div>
@@ -118,7 +123,7 @@ export default function WhyRevoWorks() {
               </div>
               <div className="mt-auto relative z-10 w-[260px]">
                 <span className="text-[#34D399] text-[10px] font-mono font-bold uppercase tracking-widest block mb-2 opacity-0 -translate-y-4 transition-all duration-500 delay-100 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:hidden block">Step 02</span>
-                <h4 className="font-display font-black text-white text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Rule Your<br/>Streets</h4>
+                <h3 className="font-display font-black text-white text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Rule Your<br/>Streets</h3>
                 <p className="text-gray-400 text-xs md:text-sm leading-relaxed opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-150">Stop grinding in secret. Your sweat now paints the map. Claim your neighborhood.</p>
               </div>
             </div>
@@ -138,7 +143,7 @@ export default function WhyRevoWorks() {
               </div>
               <div className="mt-auto relative z-10 text-white w-[260px]">
                 <span className="text-white/80 text-[10px] font-mono font-bold uppercase tracking-widest block mb-2 opacity-0 -translate-y-4 transition-all duration-500 delay-100 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:hidden block">Step 03</span>
-                <h4 className="font-display font-black text-white text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Level Up<br/>Daily</h4>
+                <h3 className="font-display font-black text-white text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Level Up<br/>Daily</h3>
                 <p className="text-white/90 text-xs md:text-sm leading-relaxed opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-150">Build unbreakable habits, hit daily streaks, and secure your spot on local leaderboards.</p>
               </div>
             </div>
@@ -156,7 +161,7 @@ export default function WhyRevoWorks() {
               </div>
               <div className="mt-auto relative z-10 w-[260px]">
                 <span className="text-[#16A34A] text-[10px] font-mono font-bold uppercase tracking-widest block mb-2 opacity-0 -translate-y-4 transition-all duration-500 delay-100 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:hidden block">Step 04</span>
-                <h4 className="font-display font-black text-[#1F2937] text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Build Your<br/>Squad</h4>
+                <h3 className="font-display font-black text-[#1F2937] text-2xl md:text-3xl uppercase leading-none mb-3 whitespace-normal overflow-visible">Build Your<br/>Squad</h3>
                 <p className="text-gray-500 text-xs md:text-sm leading-relaxed opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-150">You're never running alone. Watch your local streets glow as your squad's energy builds.</p>
               </div>
             </div>

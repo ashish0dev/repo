@@ -200,6 +200,19 @@ export default function Home() {
   const activeRoutine = ROUTINES[timePeriod];
 
   useGSAP(() => {
+    // ── SCENE 1: INITIAL HERO LOAD STAGGER ──
+    gsap.fromTo(".hero-content > *", 
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: "power4.out" }
+    );
+
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      // Set values immediately for mobile to bypass ScrollTrigger registration overhead
+      gsap.set(showcaseRef.current, { opacity: 1, y: 0 });
+      gsap.set("#waitlist .relative.z-20 > *", { opacity: 1, y: 0 });
+      return;
+    }
+
     let mm = gsap.matchMedia(container);
 
     mm.add("(min-width: 1024px)", () => {
@@ -310,11 +323,6 @@ export default function Home() {
       });
     });
 
-    // ── SCENE 1: INITIAL HERO LOAD STAGGER ──
-    gsap.fromTo(".hero-content > *", 
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: "power4.out" }
-    );
 
     // ── SCENE 6: FINAL CTA SCROLL ENTRANCE ──
     gsap.fromTo("#waitlist .relative.z-20 > *", 
@@ -400,7 +408,7 @@ export default function Home() {
             <WaitlistForm />
           </div>
 
-          <p className="mt-5 flex items-center gap-1.5 text-[11px] font-bold text-gray-500">
+          <p className="mt-5 flex items-center gap-1.5 text-[11px] font-bold text-gray-600">
             <Users className="w-3.5 h-3.5 text-[#16A34A]" />
             Join <span className="tabular-nums text-[#1F2937]">{waitlistCount.toLocaleString()}+</span> runners already on the list
           </p>
@@ -472,7 +480,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-[13px] font-bold text-[#1F2937] leading-none mb-1.5">Hub Domination</p>
-                  <p className="text-[10px] text-gray-400 font-medium tracking-wide">Conquer local loops</p>
+                  <p className="text-[10px] text-gray-600 font-semibold tracking-wide">Conquer local loops</p>
                 </div>
               </div>
             </div>
@@ -484,7 +492,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-[13px] font-bold text-[#1F2937] leading-none mb-1.5">Cooperative Glow</p>
-                  <p className="text-[10px] text-gray-400 font-medium tracking-wide">Merged trails glow brighter</p>
+                  <p className="text-[10px] text-gray-600 font-semibold tracking-wide">Merged trails glow brighter</p>
                 </div>
               </div>
             </div>
@@ -496,7 +504,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-[13px] font-bold text-[#1F2937] leading-none mb-1.5">Live Co-Presence</p>
-                  <p className="text-[10px] text-gray-400 font-medium tracking-wide">See active movers real-time</p>
+                  <p className="text-[10px] text-gray-600 font-semibold tracking-wide">See active movers real-time</p>
                 </div>
               </div>
             </div>
@@ -508,7 +516,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-[13px] font-bold text-[#1F2937] leading-none mb-1.5">Territory Battles</p>
-                  <p className="text-[10px] text-gray-400 font-medium tracking-wide">Defend your home turf</p>
+                  <p className="text-[10px] text-gray-600 font-semibold tracking-wide">Defend your home turf</p>
                 </div>
               </div>
             </div>
@@ -520,7 +528,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-[13px] font-bold text-[#1F2937] leading-none mb-1.5">Dynamic Grid Impact</p>
-                  <p className="text-[10px] text-gray-400 font-medium tracking-wide">Shape the city map color</p>
+                  <p className="text-[10px] text-gray-600 font-semibold tracking-wide">Shape the city map color</p>
                 </div>
               </div>
             </div>

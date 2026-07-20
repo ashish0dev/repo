@@ -266,7 +266,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">
-                    <label htmlFor="fullName" className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>Full Name</label>
+                    <label htmlFor="fullName" className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-300' : 'text-gray-600'}`}>Full Name</label>
                     <input
                       id="fullName"
                       type="text"
@@ -278,7 +278,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
                     />
                   </div>
                   <div className="col-span-2">
-                    <label htmlFor="yourArea" className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>Your Area</label>
+                    <label htmlFor="yourArea" className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-300' : 'text-gray-600'}`}>Your Area</label>
                     <select
                       id="yourArea"
                       required

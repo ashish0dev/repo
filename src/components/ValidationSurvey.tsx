@@ -71,6 +71,12 @@ export default function ValidationSurvey() {
   const [completed, setCompleted] = useState(false);
 
   useGSAP(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      // Set values immediately for mobile to bypass ScrollTrigger registration overhead
+      gsap.set(".survey-box", { opacity: 1, y: 0 });
+      return;
+    }
+
     gsap.fromTo(
       ".survey-box",
       { opacity: 0, y: 30 },
@@ -130,6 +136,7 @@ export default function ValidationSurvey() {
             src="/real-transparent-runner.png"
             alt="Athlete Runner Silhouette"
             fill
+            sizes="(max-width: 1024px) 100vw, 900px"
             className="object-contain object-bottom lg:object-right-bottom drop-shadow-2xl"
           />
         </div>
