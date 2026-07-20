@@ -353,10 +353,13 @@ export default function Home() {
       
       {/* ── NAV ────────────────────────────────────────────────────── */}
       <nav className="absolute top-0 left-0 w-full z-50 bg-transparent">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-start">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Image src="/main-logo-transparent.png" alt="Revo Logo" width={24} height={24} priority style={{ height: "auto" }} />
             <span className="nav-brand-text font-sans font-bold tracking-[0.25em] uppercase text-base text-[#1F2937] transition-colors duration-200">Revo</span>
+          </div>
+          <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-[#1F2937]/75">
+            <Link href="/blog" className="hover:text-[#16A34A] transition-colors cursor-pointer">Blog</Link>
           </div>
         </div>
       </nav>
@@ -990,6 +993,7 @@ export default function Home() {
             Revo © 2026 · Made in India
           </p>
           <div className="flex gap-6 text-[9px] font-bold uppercase tracking-widest text-gray-400">
+            <Link href="/blog" className="hover:text-[#16A34A] transition-colors cursor-pointer">Blog</Link>
             <Link href="/privacy" className="hover:text-[#16A34A] transition-colors cursor-pointer">Privacy</Link>
             <Link href="/terms" className="hover:text-[#16A34A] transition-colors cursor-pointer">Terms</Link>
             <a href="https://www.linkedin.com/company/therevofitness" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors cursor-pointer">LinkedIn</a>
