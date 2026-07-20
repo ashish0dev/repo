@@ -89,8 +89,8 @@ export default function ProblemSection() {
                src="/theme-cartoon.jpg"
                alt="Premium 3D rendering showing a runner isolated with their phone in a vibrant city"
                fill
+               sizes="(max-width: 1024px) 100vw, 500px"
                className="object-cover opacity-95"
-               priority
              />
              
              {/* Desktop Edge fade */}

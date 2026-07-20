@@ -43,6 +43,13 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
   const [copied, setCopied] = useState(false);
   const [isReturning, setIsReturning] = useState(false);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
+  const [origin, setOrigin] = useState("https://revo.origina.in");
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -167,7 +174,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
     }
   };
 
-  const referralLink = `https://revo.run/waitlist?ref=${referralCode || "JOIN"}`;
+  const referralLink = `${origin}?ref=${referralCode || "JOIN"}`;
 
   const copyReferralLink = () => {
     navigator.clipboard.writeText(referralLink);
@@ -178,7 +185,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
 
   const shareOnWhatsApp = () => {
     track("whatsapp_share");
-    window.open(`https://wa.me/?text=${encodeURIComponent(WHATSAPP_SHARE_TEXT(referralLink))}`, "_blank");
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(WHATSAPP_SHARE_TEXT(referralLink))}`, "_blank");
   };
 
   return (
@@ -196,13 +203,14 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
                 <input
                   type="email"
                   required
+                  aria-label="Email address"
                   value={formData.email}
                   onChange={(e) => {
                     setEmailError("");
                     setFormData({ ...formData, email: e.target.value });
                   }}
                   placeholder="Enter email to join waitlist"
-                  className={`bg-transparent text-sm font-sans pl-5 pr-2 py-3 flex-grow focus:outline-none min-w-0 ${
+                  className={`bg-transparent text-base font-sans pl-5 pr-2 py-3 flex-grow focus:outline-none min-w-0 ${
                     dark
                       ? "text-white placeholder-white/50"
                       : "text-gray-900 placeholder-gray-400"
@@ -258,26 +266,28 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">
-                    <label className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>Full Name</label>
+                    <label htmlFor="fullName" className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>Full Name</label>
                     <input
+                      id="fullName"
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none transition-colors ${dark ? 'bg-white/5 border-white/10 text-white focus:border-emerald-500/50' : 'bg-gray-50 border-gray-200 text-gray-900 focus:border-gray-400'}`}
+                      className={`w-full px-4 py-3 rounded-xl border text-base focus:outline-none transition-colors ${dark ? 'bg-white/5 border-white/10 text-white focus:border-emerald-500/50' : 'bg-gray-50 border-gray-200 text-gray-900 focus:border-gray-400'}`}
                       placeholder="Jane Doe"
                     />
                   </div>
                   <div className="col-span-2">
-                    <label className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>Your Area</label>
+                    <label htmlFor="yourArea" className={`block text-[10px] font-bold uppercase tracking-wider mb-1.5 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>Your Area</label>
                     <select
+                      id="yourArea"
                       required
                       value={formData.area}
                       onChange={(e) => {
                         setError("");
                         setFormData({ ...formData, area: e.target.value as Area });
                       }}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm focus:outline-none transition-colors cursor-pointer ${
+                      className={`w-full px-4 py-3 rounded-xl border text-base focus:outline-none transition-colors cursor-pointer ${
                         dark
                           ? "bg-[#0f172a] border-white/10 text-white focus:border-emerald-500/50"
                           : "bg-gray-50 border-gray-200 text-[#1F2937] focus:border-gray-400"
@@ -296,10 +306,11 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
                       <input
                         type="text"
                         required
+                        aria-label="Which neighbourhood?"
                         value={formData.areaOther}
                         onChange={(e) => setFormData({ ...formData, areaOther: e.target.value })}
                         placeholder="Which neighbourhood?"
-                        className={`w-full mt-2.5 px-4 py-3 rounded-xl border text-sm focus:outline-none transition-colors ${dark ? 'bg-white/5 border-white/10 text-white focus:border-emerald-500/50' : 'bg-gray-50 border-gray-200 text-gray-900 focus:border-gray-400'}`}
+                        className={`w-full mt-2.5 px-4 py-3 rounded-xl border text-base focus:outline-none transition-colors ${dark ? 'bg-white/5 border-white/10 text-white focus:border-emerald-500/50' : 'bg-gray-50 border-gray-200 text-gray-900 focus:border-gray-400'}`}
                       />
                     )}
                   </div>

@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 export default function PhoneFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {

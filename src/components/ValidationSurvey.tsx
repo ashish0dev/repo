@@ -88,7 +88,7 @@ export default function ValidationSurvey() {
     );
   }, { scope: container });
 
-  const handleSelect = (option: string) => {
+  const handleSelect = async (option: string) => {
     const updated = { ...answers, [QUESTIONS[currentIdx].id]: option };
     setAnswers(updated);
 
@@ -98,7 +98,20 @@ export default function ValidationSurvey() {
       setCompleted(true);
       try {
         localStorage.setItem("revo_validation_survey", JSON.stringify(updated));
-      } catch { }
+      } catch {
+        // localStorage full/unavailable
+      }
+
+      // Send responses to the API route to save in CSV/Google Sheet
+      try {
+        await fetch("/api/survey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ answers: updated }),
+        });
+      } catch (err) {
+        console.error("Failed to submit survey to server:", err);
+      }
     }
   };
 
@@ -192,14 +205,23 @@ export default function ValidationSurvey() {
                 <CheckCircle2 className="w-10 h-10 text-[#16A34A]" />
               </div>
               <div>
-                <h3 className="font-display font-black text-black text-3xl sm:text-4xl uppercase tracking-tight">You're On The List!</h3>
+                <h3 className="font-display font-black text-black text-3xl sm:text-4xl uppercase tracking-tight">Feedback Received!</h3>
                 <p className="text-[10px] text-[#16A34A] font-mono font-bold tracking-[0.2em] uppercase mt-3 bg-[#16A34A]/10 inline-block px-4 py-1.5 rounded-full border border-[#16A34A]/20">
-                  EARLY ACCESS SECURED
+                  Survey Completed
                 </p>
               </div>
               <p className="text-sm sm:text-base text-gray-600 max-w-sm leading-relaxed font-sans mt-3">
-                Thank you! You just helped us decide where to drop Revo first. Prepare to claim your streets and paint your city soon.
+                Thank you! You just helped us decide where to drop Revo first. Now, claim your unique runner handle and secure your spot on the waitlist!
               </p>
+              <div className="pt-2 w-full">
+                <a 
+                  href="#waitlist"
+                  className="w-full inline-flex items-center justify-center bg-black hover:bg-neutral-800 text-white font-sans font-bold text-xs uppercase tracking-widest py-4 px-6 rounded-xl transition duration-200 cursor-pointer shadow-lg active:scale-[0.98]"
+                >
+                  Join Waitlist & Claim Handle
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </a>
+              </div>
             </div>
           )}
 

@@ -354,7 +354,7 @@ export default function Home() {
       </nav>
 
       {/* ── SCENE 1: THE HERO ─────────────────────────────────────── */}
-      <section ref={heroRef} className="min-h-screen lg:h-screen w-full relative flex items-center justify-center overflow-y-auto bg-[#FAFBFC] py-12 lg:py-0">
+      <section id="hero" ref={heroRef} className="min-h-dvh lg:h-dvh w-full relative flex items-center justify-center overflow-y-auto bg-[#FAFBFC] py-12 lg:py-0">
         {/* Map background */}
         <div className="absolute inset-0 w-full h-full">
           <picture>
@@ -414,7 +414,7 @@ export default function Home() {
       <WhyRevoWorks />
 
       {/* ── SCENE 2: APP SHOWCASE (APPLE STYLE) ───────────────────── */}
-      <section ref={showcaseRef} className="w-full relative bg-[#FAFBFC] overflow-visible flex flex-col justify-start lg:justify-between pt-12 pb-2 lg:py-16 lg:min-h-screen">
+      <section ref={showcaseRef} className="w-full relative bg-[#FAFBFC] overflow-visible flex flex-col justify-start lg:justify-between pt-12 pb-2 lg:py-16 lg:min-h-dvh">
         {/* Subtle Coordinate Grid Background */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#1F2937 1px, transparent 1px), linear-gradient(90deg, #1F2937 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         
@@ -857,7 +857,7 @@ export default function Home() {
       </div>
 
       {/* ── SCENE 4: HORIZONTAL EDITORIAL SPREAD ──────────────────── */}
-      <section ref={galleryRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-center pt-4 pb-12 lg:pt-16 lg:pb-16 lg:min-h-screen">
+      <section ref={galleryRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-center pt-4 pb-12 lg:pt-16 lg:pb-16 lg:min-h-dvh">
         <div className="max-w-7xl mx-auto px-6 w-full mb-6 flex justify-between items-end">
           <div>
             <p className="text-[10px] text-[#16A34A] font-bold uppercase tracking-[0.25em] mb-2">{activeRoutine.tag}</p>
