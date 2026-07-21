@@ -3,7 +3,7 @@ import React from "react";
 export default function PhoneFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`relative ${className}`}
+      className={`relative rounded-[48px] ${className}`}
       style={{
         aspectRatio: "9 / 19.5",
         boxShadow: "0 30px 60px -15px rgba(15, 23, 42, 0.25), 0 12px 24px -10px rgba(15, 23, 42, 0.15)"
@@ -11,12 +11,11 @@ export default function PhoneFrame({ children, className = "" }: { children: Rea
     >
       {/* Outer Phone Body (Natural Titanium gradient) */}
       <div 
-        className="absolute inset-0 rounded-[13%/6%] bg-gradient-to-b from-[#e5e7eb] via-[#f3f4f6] to-[#c7cbd1] border border-[#bdc2ca] overflow-hidden shadow-[inset_0_0_8px_rgba(0,0,0,0.12)]"
+        className="absolute inset-0 rounded-[48px] bg-gradient-to-b from-[#e5e7eb] via-[#f3f4f6] to-[#c7cbd1] border border-[#bdc2ca] overflow-hidden shadow-[inset_0_0_8px_rgba(0,0,0,0.12)]"
         style={{ transform: 'translateZ(0)' }}
       >
-        
         {/* Subtle Metallic Chamfer/Highlight edge */}
-        <div className="absolute inset-[1px] rounded-[13%/6%] border border-white/60 bg-transparent pointer-events-none z-10" />
+        <div className="absolute inset-[1px] rounded-[47px] border border-white/60 bg-transparent pointer-events-none z-10" />
 
         {/* Antenna Bands (Precise iPhone-style details) */}
         <div className="absolute left-0 top-[12%] w-[1.5px] h-[1.5%] bg-[#a1a8b3]" />
@@ -35,10 +34,9 @@ export default function PhoneFrame({ children, className = "" }: { children: Rea
         <div className="absolute right-[-1.5px] top-[29%] w-[2.5px] h-[10%] bg-gradient-to-b from-[#d1d5db] to-[#9ca3af] rounded-l border-y border-l border-[#bdc2ca]" />
         
         <div 
-          className="absolute inset-[1.5%] rounded-[11.8%/5.4%] bg-black overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.15)] border border-black/80 z-20"
+          className="absolute inset-[1.5%] rounded-[42px] bg-black overflow-hidden shadow-[0_4px_10px_rgba(0,0,0,0.15)] border border-black/80 z-20"
           style={{ transform: 'translateZ(0)' }}
         >
-          
           {/* Dynamic Island (Precise sensor details) */}
           <div className="absolute top-[3%] left-1/2 -translate-x-1/2 w-[28%] h-[3.4%] bg-[#08080c] rounded-full z-50 flex items-center justify-center gap-1 shadow-inner">
             <div className="w-[18%] h-[55%] rounded-full bg-[#101018] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]" />
@@ -46,7 +44,7 @@ export default function PhoneFrame({ children, className = "" }: { children: Rea
           </div>
           
           {/* Screen Content */}
-          <div className="absolute inset-0 bg-[#FAFBFC] overflow-hidden select-none">
+          <div className="absolute inset-0 bg-[#FAFBFC] overflow-hidden select-none rounded-[40px]">
             {children}
           </div>
           
