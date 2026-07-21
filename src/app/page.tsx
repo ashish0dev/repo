@@ -255,7 +255,7 @@ export default function Home() {
         scrollTrigger: {
           trigger: showcaseRef.current,
           start: "top top",
-          end: "+=200%",
+          end: "+=100%",
           pin: true,
           scrub: 1,
           snap: {
@@ -310,12 +310,12 @@ export default function Home() {
     let galleryMm = gsap.matchMedia();
     galleryMm.add("(min-width: 1024px)", () => {
       gsap.to(".gallery-track", {
-        xPercent: -65,
+        xPercent: -45,
         ease: "none",
         scrollTrigger: {
           trigger: galleryRef.current,
           start: "top top",
-          end: "+=200%",
+          end: "+=50%",
           pin: true,
           scrub: 1,
           anticipatePin: 1,
@@ -862,10 +862,7 @@ export default function Home() {
       </section>
 
 
-      {/* ── SCARCITY STRIP ─────────────────────────────────────────── */}
-      <div className="hidden lg:block">
-        <ScarcityStrip />
-      </div>
+
 
       {/* ── SCENE 4: HORIZONTAL EDITORIAL SPREAD ──────────────────── */}
       <section ref={galleryRef} className="w-full relative bg-[#FAFBFC] overflow-hidden flex flex-col justify-center pt-4 pb-12 lg:pt-16 lg:pb-16 lg:min-h-dvh">
@@ -876,7 +873,7 @@ export default function Home() {
               {activeRoutine.title}
             </h3>
           </div>
-          <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 hidden sm:block">Scroll to explore →</span>
+          <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 block lg:hidden">Scroll to explore →</span>
         </div>
 
         <div className="w-full overflow-visible">
